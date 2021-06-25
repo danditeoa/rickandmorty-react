@@ -1,25 +1,15 @@
-import React from 'react';
-import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import React from "react";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link
 } from "react-router-dom";
-import Characters from './components/Characters/Characters';
-import Home from './components/Home/Home';
-import Episodes from './components/Episodes/Episodes';
+import Episodes from "./components/Episodes/Episodes";
 
-function App() {
-
-  const client = new ApolloClient({
-    uri: "https://rickandmortyapi.com/graphql",
-    cache: new InMemoryCache(),
-  });
-
+export default function App() {
   return (
-    <ApolloProvider client={client}>
-      <Router>
+    <Router>
       <div>
         <nav>
           <ul>
@@ -27,29 +17,41 @@ function App() {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/characters">Character</Link>
+              <Link to="/about">About</Link>
             </li>
             <li>
-              <Link to="/episodes">Episodes</Link>
+              <Link to="/users">Users</Link>
             </li>
           </ul>
         </nav>
 
+        {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
         <Switch>
+          <Route path="/about">
+            <About />
+            <Episodes />
+          </Route>
+          <Route path="/users">
+            <Users />
+          </Route>
           <Route path="/">
             <Home />
-          </Route>
-          <Route path="/characters">
-            <Characters />
-          </Route>
-          <Route path="/episodes">
-            <Episodes />
           </Route>
         </Switch>
       </div>
     </Router>
-    </ApolloProvider>
   );
 }
 
-export default App;
+function Home() {
+  return <h2>Home</h2>;
+}
+
+function About() {
+  return <h2>About</h2>;
+}
+
+function Users() {
+  return <h2>Users</h2>;
+}
