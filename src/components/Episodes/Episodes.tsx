@@ -14,7 +14,6 @@ function Episodes() {
     return <div>`Error! ${error.message}`</div>;
   }
 
-  console.log(data);
   return (
     <select name="episode">
       {data.episodes.results.map((episode: any) => (
